@@ -44,17 +44,37 @@ The website shows you the **exact full path** of this folder and gives each step
 
 ---
 
-## The 5 steps
+## The steps
 
-| Step | What it does | Reads | Writes |
-|------|--------------|-------|--------|
-| **1 — BY Countries** | Merges internal + external recipient files, de-dupes emails, tags **Internal/External** (`@uobkayhian.com` ⇒ Internal). | `01 .../all sales.xlsx` + every other `.xlsx` in folder 01 | `Output/01/SG Hubspot Email List - BY Countries.xlsx` |
-| **2 — BY Tiers** | Validates the tier file (needs columns **Email Address, Name, Region, Tier**) and counts people per region. | `02 .../SG Hubspot Email List - BY Tiers.xlsx` | `Output/02/...BY Tiers.xlsx` |
-| **3 — Main** | Combines Countries + Tiers, overlays tier onto each contact, and re-labels **Tier 1–3 + China ⇒ Hong Kong**. | Output of Steps 1 & 2 | `Output/03/SG Hubspot Email List - Main.xlsx` |
-| **4 — BY Publication** | Walks the publication folder tree (CN/EN aware), de-dupes by campaign ID, and builds the **Master Panel** mapping. | Folder `04 ...` | `Output/04/...BY Publication.xlsx` **+** `Master Panel ...xlsx` |
-| **5 — Masterlist** | Builds the final multi-tab engagement report (open/click rates, loyalty tiers, per-publication breakdowns). | Output of Steps 3 & 4 | `05 .../masterlist.xlsx` |
+The website groups the five steps into three plain-English phases. Run them top to
+bottom — each card shows a status pill and a **Run** button, and tucks the file details
+behind a **“Files & details”** toggle so the page stays clean.
 
-Run them in order with each step’s **▶ Run** button, or hit **“Run all steps (1 → 5)”**.
+### Phase 1 · Contacts
+
+| # | Step | What it does | Produces |
+|---|------|--------------|----------|
+| 1 | **Countries** *(rarely changes)* | Merge internal + external recipient lists, de-dupe, tag **Internal / External** (`@uobkayhian.com` ⇒ Internal). | `Output/01/SG Hubspot Email List - BY Countries.xlsx` |
+| 2 | **Tiers** *(rarely changes)* | Validate the tier file (cols **Email Address, Name, Region, Tier**) and count people per region. | `Output/02/SG Hubspot Email List - BY Tiers.xlsx` |
+| 3 | **Contact master** | Combine Countries + Tiers; **Tier 1–3 in China ⇒ Hong Kong**. | `Output/03/SG Hubspot Email List - Main.xlsx` |
+
+### Phase 2 · Campaigns
+
+| # | Step | What it does | Produces |
+|---|------|--------------|----------|
+| 4 | **Publications** | Walk the publication folders (CN/EN aware), de-dupe by campaign ID, build the **Master Panel** mapping. | `Output/04/...BY Publication.xlsx` **+** `Master Panel ...xlsx` |
+
+### Phase 3 · Report
+
+| # | Step | What it does | Produces |
+|---|------|--------------|----------|
+| 5 | **Masterlist report** | Build the final multi-tab engagement report (open/click rates, loyalty tiers, per-publication breakdowns). | `05 .../masterlist.xlsx` |
+
+Run them in order, or hit **“Run all steps”** at the top.
+
+> **Near-static files:** the **Countries** and **Tiers** outputs change rarely (marked
+> *rarely changes* on the site). Keep ready-made copies in `Output/01` and `Output/02`
+> so you can jump straight to step 3, and re-run steps 1 / 2 only when your lists change.
 
 ### Folder 04 layout (publications)
 

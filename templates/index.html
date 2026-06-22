@@ -7,93 +7,87 @@
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">📊</span>
-      <div>
-        <h1>Hubspot Analysis Tool</h1>
-        <p class="tagline">Runs entirely on your computer — no Google Drive, no internet needed.</p>
+  <header class="header">
+    <div class="wrap">
+      <div class="title">
+        <span class="dot">📊</span>
+        <div>
+          <h1>Hubspot Analysis Tool</h1>
+          <div class="tagline">Turn your Hubspot exports into the masterlist report — runs on your computer.</div>
+        </div>
       </div>
+      <button id="runAllBtn" class="btn btn-primary">▶ Run all steps</button>
     </div>
-    <button id="runAllBtn" class="btn btn-primary">▶ Run all steps (1 → 5)</button>
   </header>
 
-  <section class="datadir card">
-    <h2>1. Where to put your files</h2>
-    <p>Place all of your input folders &amp; files inside this one dedicated directory:</p>
-    <div class="path-row">
-      <code id="dataDir">loading…</code>
-      <button class="btn btn-ghost" data-open="">📂 Open folder</button>
-      <button class="btn btn-ghost" id="copyDir">⧉ Copy path</button>
-    </div>
-    <p class="hint">
-      The folders below already exist inside that directory. Drop your Excel files into the matching folder,
-      then run the steps in order. Outputs are written to the <code>Output</code> sub-folder.
-    </p>
-  </section>
+  <main class="wrap">
 
-  <section class="steps">
-    <h2>2. Run the pipeline</h2>
-    <div id="stepList"><!-- step cards injected by app.js --></div>
-  </section>
-
-  <section class="mapping card">
-    <h2>⚠️ Important: the mapping file (between Step 4 and Step 5)</h2>
-    <p>
-      Step 4 creates the <strong>Master Panel</strong> mapping file at
-      <code>Output/04/Master Panel SG Hubspot Email - BY Publication.xlsx</code>.
-      It has a <strong>Campaign Mapping</strong> tab with two control columns you may want to edit before Step 5:
-    </p>
-    <ul>
-      <li><strong>MUTE OR NOT</strong> — set to <code>1</code> to completely exclude a campaign; blank or <code>0</code> keeps it.</li>
-      <li><strong>Into All Publications or not?</strong> — <code>1</code> (or blank) includes it in the "0 All Publications" &amp; loyalty tables; <code>0</code> keeps it only in its own publication table.</li>
-    </ul>
-    <p class="hint">
-      A ready-to-use blank template of this file is included in the repo under
-      <code>samples/Master Panel - TEMPLATE.xlsx</code> so you can see the exact column layout.
-      Step 4 regenerates the real one from your data each time it runs.
-    </p>
-    <button class="btn btn-ghost" data-open="Output\04">📂 Open Output/04 folder</button>
-  </section>
-
-  <section class="extension card">
-    <div class="ext-head">
-      <div>
-        <h2>🧩 Chrome Extension — <span id="extName">HubSpot Bulk Recipient Export (ZIP)</span> <span id="extVer" class="ver"></span></h2>
-        <p class="ext-desc" id="extDesc">Select multiple marketing emails in HubSpot and download all their recipient lists as XLSX in one named ZIP.</p>
+    <!-- Setup -->
+    <section class="card setup">
+      <div class="eyebrow">Setup · do this once</div>
+      <h2>Put your files in this folder</h2>
+      <p class="tagline">Each step below has an “Open folder” button, so you don’t need to memorise this path.</p>
+      <div class="path-row">
+        <code id="dataDir">loading…</code>
+        <button class="btn btn-sm" data-open="">📂 Open</button>
+        <button class="btn btn-sm" id="copyDir">⧉ Copy</button>
       </div>
-      <a class="btn btn-primary" href="/download/extension" download>⬇ Download extension (.zip)</a>
-    </div>
+    </section>
 
-    <p>Install it once in Chrome (or Edge) and a <strong>“Download selected (ZIP)”</strong> button appears on the HubSpot email management page.</p>
+    <!-- Steps -->
+    <section>
+      <div class="eyebrow">The pipeline · run top to bottom</div>
+      <div id="stepList"><!-- injected by app.js --></div>
 
-    <ol class="install-steps">
-      <li><strong>Download</strong> the ZIP above and <strong>unzip</strong> it to a permanent folder (don’t delete it later — Chrome loads it from there).</li>
-      <li>Open <code>chrome://extensions</code> (copy-paste into the address bar).</li>
-      <li>Turn on <strong>Developer mode</strong> (toggle, top-right).</li>
-      <li>Click <strong>“Load unpacked”</strong> and select the unzipped <code>HubSpot-Bulk-Recipient-Export</code> folder (the one containing <code>manifest.json</code>).</li>
-      <li>Go to HubSpot → <em>Marketing ▸ Email</em>, tick the emails you want, and click <strong>“Download selected (ZIP)”</strong>.</li>
-    </ol>
+      <div class="note" id="mappingNote">
+        <h3>One thing before the last step</h3>
+        <p>Step 4 creates the <strong>Master Panel</strong> mapping file. Open its <em>Campaign Mapping</em> tab and,
+        if needed, adjust two columns before running Step 5:</p>
+        <ul>
+          <li><code>MUTE OR NOT</code> — <code>1</code> hides a campaign completely; blank/<code>0</code> keeps it.</li>
+          <li><code>Into All Publications or not?</code> — <code>1</code>/blank counts it everywhere; <code>0</code> keeps it only in its own publication.</li>
+        </ul>
+        <p style="margin-top:8px"><button class="btn btn-sm" data-open="Output\04">📂 Open Output/04</button></p>
+      </div>
+    </section>
 
-    <p class="hint">
-      Works on <code>https://app.hubspot.com/email/&lt;portal&gt;/manage/…</code>. Only needs the
-      <code>downloads</code> permission. To share with a colleague, just send them the ZIP and these 5 steps —
-      they don’t need this analysis tool running to use the extension.
-    </p>
-  </section>
+    <!-- Extension -->
+    <section class="card ext">
+      <div class="eyebrow">Bonus tool</div>
+      <div class="ext-head">
+        <div>
+          <h2>🧩 <span id="extName">HubSpot Bulk Recipient Export</span><span id="extVer" class="ver"></span></h2>
+          <p class="ext-desc" id="extDesc">Adds a “Download selected (ZIP)” button to Hubspot so you can export many recipient lists at once.</p>
+        </div>
+        <a class="btn btn-accent" href="/download/extension" download>⬇ Download (.zip)</a>
+      </div>
+      <details class="step-details" style="border-top:none;margin-top:6px">
+        <summary>How to install it in Chrome (4 steps)</summary>
+        <div class="details-body">
+          <ol class="steps-list">
+            <li>Unzip the download to a permanent folder (don’t delete it later).</li>
+            <li>Open <code>chrome://extensions</code> and turn on <strong>Developer mode</strong> (top-right).</li>
+            <li>Click <strong>Load unpacked</strong> and choose the unzipped folder (the one with <code>manifest.json</code>).</li>
+            <li>In Hubspot → <em>Marketing ▸ Email</em>, tick emails and click <strong>Download selected (ZIP)</strong>.</li>
+          </ol>
+          <p style="margin-top:8px">To share with a colleague, just send them the ZIP and these 4 steps.</p>
+        </div>
+      </details>
+    </section>
 
-  <section class="log card">
-    <div class="log-head">
-      <h2>Output log</h2>
-      <button id="clearLog" class="btn btn-ghost">Clear</button>
-    </div>
-    <pre id="logBox" class="logbox">Ready. Click a step's “Run” button to begin.</pre>
-  </section>
+    <!-- Log -->
+    <section class="card">
+      <details open>
+        <summary class="log-summary">Output log</summary>
+        <pre id="logBox" class="logbox">Ready. Click a step’s “Run” button to begin.</pre>
+        <p style="margin-top:8px"><button id="clearLog" class="btn btn-sm">Clear log</button>
+        <span id="busy" class="busy hidden">● working…</span></p>
+      </details>
+    </section>
 
-  <footer class="footer">
-    <span id="busy" class="busy hidden">● working…</span>
-    Hubspot Analysis Tool · local edition
-  </footer>
+  </main>
+
+  <footer class="footer">Hubspot Analysis Tool · local edition</footer>
 
   <script src="/static/app.js"></script>
 </body>

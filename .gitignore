@@ -10,9 +10,17 @@ data/Hubspot/**/*.xlsm
 data/Hubspot/**/*.xls
 data/Hubspot/**/*.csv
 
+# ...but DO keep the two near-static reference files bundled in the repo
+!data/Hubspot/02 Hubspot Email List - BY Tiers/SG Hubspot Email List - BY Tiers.xlsx
+!data/Hubspot/Output/01/SG Hubspot Email List - BY Countries.xlsx
+!data/Hubspot/Output/02/SG Hubspot Email List - BY Tiers.xlsx
+
 # Never ignore the sample template
 !samples/
 !samples/**
+
+# Local preview / editor config (machine-specific)
+.claude/
 
 # OS noise
 Thumbs.db

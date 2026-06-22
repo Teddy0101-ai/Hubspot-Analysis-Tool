@@ -40,39 +40,54 @@ app = Flask(__name__, template_folder="templates", static_folder="static")
 # ---------------------------------------------------------------------------
 STEPS = {
     "1": {
-        "title": "Step 1 — BY Countries",
+        "name": "Countries",
+        "phase": "Contacts",
         "fn": step1_countries.run,
         "input_folder": "01 Hubspot Email List - BY Countries",
-        "needs": "Put 'all sales.xlsx' (internal) plus every external recipient .xlsx here.",
-        "output": "Output/01/SG Hubspot Email List - BY Countries.xlsx",
+        "does": "Merge internal + external recipient lists, remove duplicates, tag each as Internal / External.",
+        "provide": "Put all sales.xlsx (your internal list) plus every external recipient .xlsx into the folder. Email must be in column D.",
+        "output": "SG Hubspot Email List - BY Countries.xlsx",
+        "static": True,
     },
     "2": {
-        "title": "Step 2 — BY Tiers",
+        "name": "Tiers",
+        "phase": "Contacts",
         "fn": step2_tiers.run,
         "input_folder": "02 Hubspot Email List - BY Tiers",
-        "needs": "Put exactly 'SG Hubspot Email List - BY Tiers.xlsx' here (cols: Email Address, Name, Region, Tier).",
-        "output": "Output/02/SG Hubspot Email List - BY Tiers.xlsx",
+        "does": "Check the tier file is valid and count people per region.",
+        "provide": "One file named exactly 'SG Hubspot Email List - BY Tiers.xlsx' with columns: Email Address, Name, Region, Tier.",
+        "output": "SG Hubspot Email List - BY Tiers.xlsx",
+        "static": True,
     },
     "3": {
-        "title": "Step 3 — Main",
+        "name": "Contact master",
+        "phase": "Contacts",
         "fn": step3_main.run,
         "input_folder": None,
-        "needs": "Uses the outputs of Step 1 and Step 2. Run those first.",
-        "output": "Output/03/SG Hubspot Email List - Main.xlsx",
+        "does": "Combine Countries + Tiers into one master list (Tier 1–3 in China are relabelled Hong Kong).",
+        "provide": "Nothing — uses the results of steps 1 and 2.",
+        "output": "SG Hubspot Email List - Main.xlsx",
+        "static": False,
     },
     "4": {
-        "title": "Step 4 — BY Publication",
+        "name": "Publications",
+        "phase": "Campaigns",
         "fn": step4_publication.run,
         "input_folder": "04 Hubspot Email List - By Publication",
-        "needs": "One sub-folder per publication (CN/EN sub-folders allowed). Place each campaign .xlsx inside its publication folder.",
-        "output": "Output/04/SG Hubspot Email List - BY Publication.xlsx  +  Master Panel SG Hubspot Email - BY Publication.xlsx",
+        "does": "Scan the publication folders, de-duplicate campaigns, and build the Master Panel mapping.",
+        "provide": "One sub-folder per publication (CN / EN sub-folders allowed). Put each campaign .xlsx inside its publication folder.",
+        "output": "SG Hubspot Email List - BY Publication.xlsx + Master Panel ...xlsx",
+        "static": False,
     },
     "5": {
-        "title": "Step 5 — Masterlist",
+        "name": "Masterlist report",
+        "phase": "Report",
         "fn": step5_masterlist.run,
         "input_folder": None,
-        "needs": "Uses Step 3 + Step 4 outputs. Review the Master Panel mapping (MUTE / Into All Publications) before running.",
-        "output": "05 Hubspot Email list - Masterlist/masterlist.xlsx",
+        "does": "Build the final multi-tab engagement report (open / click rates, loyalty tiers, per-publication breakdowns).",
+        "provide": "Nothing — uses steps 3 and 4. Tip: review the Master Panel mapping first (see the note below the steps).",
+        "output": "masterlist.xlsx",
+        "static": False,
     },
 }
 
@@ -112,15 +127,16 @@ def index():
 def api_info():
     steps_out = []
     for sid, meta in STEPS.items():
-        folder = None
-        if meta["input_folder"]:
-            folder = str((DATA_DIR / meta["input_folder"]))
+        rel_folder = meta["input_folder"] or ""
         steps_out.append({
             "id": sid,
-            "title": meta["title"],
-            "needs": meta["needs"],
+            "name": meta["name"],
+            "phase": meta["phase"],
+            "does": meta["does"],
+            "provide": meta["provide"],
             "output": meta["output"],
-            "input_folder": folder,
+            "input_folder": rel_folder,
+            "static": meta.get("static", False),
         })
     return jsonify({
         "data_dir": str(DATA_DIR),
