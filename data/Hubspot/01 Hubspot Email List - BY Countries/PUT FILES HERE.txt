@@ -1,0 +1,17 @@
+STEP 1 — BY Countries
+=====================
+
+Put into THIS folder:
+
+  * all sales.xlsx      <-- your INTERNAL recipient list (rename it to exactly this)
+  * <any number of>.xlsx <-- the EXTERNAL recipient export files
+
+Rules:
+  - The email address must be in column D of each file.
+  - Emails containing @uobkayhian.com or @uobkayhian.com.uk are tagged Internal.
+  - Duplicate emails are removed automatically.
+
+Then run Step 1 in the web app.
+Output -> Output/01/SG Hubspot Email List - BY Countries.xlsx
+
+(You can delete this text file.)

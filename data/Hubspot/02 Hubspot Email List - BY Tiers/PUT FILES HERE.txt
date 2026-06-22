@@ -1,0 +1,15 @@
+STEP 2 — BY Tiers
+=================
+
+Put into THIS folder ONE file named exactly:
+
+  SG Hubspot Email List - BY Tiers.xlsx
+
+It MUST contain these 4 column headers (any order):
+
+  Email Address | Name | Region | Tier
+
+Then run Step 2 in the web app.
+Output -> Output/02/SG Hubspot Email List - BY Tiers.xlsx
+
+(You can delete this text file.)

@@ -1,0 +1,29 @@
+STEP 4 — BY Publication
+=======================
+
+Create ONE sub-folder per publication inside THIS folder, and place each
+campaign Excel file inside its publication's sub-folder.
+
+Example layout:
+
+  04 Hubspot Email List - By Publication/
+  |
+  +-- CIO Quarterly Review/
+  |       file.xlsx
+  |
+  +-- China Bi-Weekly/
+          CN/
+              file.xlsx
+          EN/
+              file.xlsx
+
+Rules:
+  - One sub-folder = one publication.
+  - CN / EN language variants go inside CN / EN sub-folders.
+  - Do NOT place Excel files loose in the root of this folder.
+
+Then run Step 4 in the web app. It produces:
+  Output/04/SG Hubspot Email List - BY Publication.xlsx
+  Output/04/Master Panel SG Hubspot Email - BY Publication.xlsx  <-- the mapping file
+
+(You can delete this text file.)

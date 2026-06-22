@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hubspot Analysis Tool</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">📊</span>
+      <div>
+        <h1>Hubspot Analysis Tool</h1>
+        <p class="tagline">Runs entirely on your computer — no Google Drive, no internet needed.</p>
+      </div>
+    </div>
+    <button id="runAllBtn" class="btn btn-primary">▶ Run all steps (1 → 5)</button>
+  </header>
+
+  <section class="datadir card">
+    <h2>1. Where to put your files</h2>
+    <p>Place all of your input folders &amp; files inside this one dedicated directory:</p>
+    <div class="path-row">
+      <code id="dataDir">loading…</code>
+      <button class="btn btn-ghost" data-open="">📂 Open folder</button>
+      <button class="btn btn-ghost" id="copyDir">⧉ Copy path</button>
+    </div>
+    <p class="hint">
+      The folders below already exist inside that directory. Drop your Excel files into the matching folder,
+      then run the steps in order. Outputs are written to the <code>Output</code> sub-folder.
+    </p>
+  </section>
+
+  <section class="steps">
+    <h2>2. Run the pipeline</h2>
+    <div id="stepList"><!-- step cards injected by app.js --></div>
+  </section>
+
+  <section class="mapping card">
+    <h2>⚠️ Important: the mapping file (between Step 4 and Step 5)</h2>
+    <p>
+      Step 4 creates the <strong>Master Panel</strong> mapping file at
+      <code>Output/04/Master Panel SG Hubspot Email - BY Publication.xlsx</code>.
+      It has a <strong>Campaign Mapping</strong> tab with two control columns you may want to edit before Step 5:
+    </p>
+    <ul>
+      <li><strong>MUTE OR NOT</strong> — set to <code>1</code> to completely exclude a campaign; blank or <code>0</code> keeps it.</li>
+      <li><strong>Into All Publications or not?</strong> — <code>1</code> (or blank) includes it in the "0 All Publications" &amp; loyalty tables; <code>0</code> keeps it only in its own publication table.</li>
+    </ul>
+    <p class="hint">
+      A ready-to-use blank template of this file is included in the repo under
+      <code>samples/Master Panel - TEMPLATE.xlsx</code> so you can see the exact column layout.
+      Step 4 regenerates the real one from your data each time it runs.
+    </p>
+    <button class="btn btn-ghost" data-open="Output\04">📂 Open Output/04 folder</button>
+  </section>
+
+  <section class="log card">
+    <div class="log-head">
+      <h2>Output log</h2>
+      <button id="clearLog" class="btn btn-ghost">Clear</button>
+    </div>
+    <pre id="logBox" class="logbox">Ready. Click a step's “Run” button to begin.</pre>
+  </section>
+
+  <footer class="footer">
+    <span id="busy" class="busy hidden">● working…</span>
+    Hubspot Analysis Tool · local edition
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

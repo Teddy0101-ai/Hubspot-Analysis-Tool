@@ -1,0 +1,19 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+.installed
+
+# User data and generated outputs (keep the empty folders, ignore the files)
+data/Hubspot/**/*.xlsx
+data/Hubspot/**/*.xlsm
+data/Hubspot/**/*.xls
+data/Hubspot/**/*.csv
+
+# Never ignore the sample template
+!samples/
+!samples/**
+
+# OS noise
+Thumbs.db
+.DS_Store
