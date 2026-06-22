@@ -1,0 +1,93 @@
+.hsbe-panel {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 320px;
+  background: #fff;
+  border: 1px solid #cbd6e2;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(45, 62, 80, 0.28);
+  font-family: "Lexend Deca", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  color: #33475b;
+  z-index: 2147483000;
+  overflow: hidden;
+}
+
+.hsbe-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: linear-gradient(90deg, #00a4bd, #00bda5);
+  color: #fff;
+}
+
+.hsbe-title { font-weight: 600; font-size: 13px; letter-spacing: .2px; }
+
+.hsbe-min {
+  background: rgba(255, 255, 255, .18);
+  border: 0;
+  color: #fff;
+  width: 22px; height: 22px;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 14px;
+  font-weight: 700;
+}
+.hsbe-min:hover { background: rgba(255, 255, 255, .32); }
+
+.hsbe-body { padding: 12px; }
+.hsbe-collapsed .hsbe-body { display: none; }
+
+.hsbe-label { display: block; font-size: 11px; font-weight: 600; color: #516f90; margin-bottom: 5px; }
+
+.hsbe-namerow {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd6e2;
+  border-radius: 6px;
+  padding: 0 8px;
+  background: #f5f8fa;
+}
+.hsbe-namerow:focus-within { border-color: #00a4bd; background: #fff; }
+
+.hsbe-name {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  padding: 8px 4px 8px 0;
+  font-size: 13px;
+  color: #33475b;
+  outline: none;
+  min-width: 0;
+}
+.hsbe-ext { color: #7c98b6; font-size: 12px; }
+
+.hsbe-count { margin: 10px 0; color: #516f90; }
+.hsbe-count b { color: #33475b; }
+
+.hsbe-go {
+  width: 100%;
+  border: 0;
+  border-radius: 6px;
+  background: #ff7a59;
+  color: #fff;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 10px;
+  cursor: pointer;
+}
+.hsbe-go:hover { background: #ff8f73; }
+.hsbe-go:disabled { background: #b0c1d4; cursor: default; }
+
+.hsbe-status {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #7c98b6;
+  min-height: 16px;
+  word-break: break-word;
+}
+.hsbe-status.hsbe-ok { color: #00a38c; font-weight: 600; }
+.hsbe-status.hsbe-err { color: #d94c53; font-weight: 600; }

@@ -177,5 +177,19 @@ document.getElementById("copyDir").onclick = async () => {
 };
 document.querySelector('[data-open=""]').onclick = () => openFolder("");
 
+async function loadExtension() {
+  try {
+    const res = await fetch("/api/extension");
+    const m = await res.json();
+    if (m.name) document.getElementById("extName").textContent = m.name;
+    if (m.description) document.getElementById("extDesc").textContent = m.description;
+    const ver = document.getElementById("extVer");
+    if (m.version) ver.textContent = "v" + m.version;
+  } catch (e) {
+    /* extension section keeps its default text if this fails */
+  }
+}
+
 loadInfo();
+loadExtension();
 setInterval(refreshStatus, 4000);

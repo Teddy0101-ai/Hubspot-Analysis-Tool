@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "HubSpot Bulk Recipient Export (ZIP)",
+  "version": "1.3.0",
+  "description": "Select multiple marketing emails and download all their recipient lists as XLSX in one named ZIP.",
+  "permissions": ["downloads"],
+  "host_permissions": [
+    "https://*.hubspot.com/*",
+    "https://*.hubspotusercontent-na1.net/*",
+    "https://*.hubspotusercontent.net/*",
+    "https://*.hubspotusercontent-eu1.net/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://app.hubspot.com/email/*/manage/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

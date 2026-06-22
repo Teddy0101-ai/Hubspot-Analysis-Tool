@@ -56,6 +56,32 @@
     <button class="btn btn-ghost" data-open="Output\04">📂 Open Output/04 folder</button>
   </section>
 
+  <section class="extension card">
+    <div class="ext-head">
+      <div>
+        <h2>🧩 Chrome Extension — <span id="extName">HubSpot Bulk Recipient Export (ZIP)</span> <span id="extVer" class="ver"></span></h2>
+        <p class="ext-desc" id="extDesc">Select multiple marketing emails in HubSpot and download all their recipient lists as XLSX in one named ZIP.</p>
+      </div>
+      <a class="btn btn-primary" href="/download/extension" download>⬇ Download extension (.zip)</a>
+    </div>
+
+    <p>Install it once in Chrome (or Edge) and a <strong>“Download selected (ZIP)”</strong> button appears on the HubSpot email management page.</p>
+
+    <ol class="install-steps">
+      <li><strong>Download</strong> the ZIP above and <strong>unzip</strong> it to a permanent folder (don’t delete it later — Chrome loads it from there).</li>
+      <li>Open <code>chrome://extensions</code> (copy-paste into the address bar).</li>
+      <li>Turn on <strong>Developer mode</strong> (toggle, top-right).</li>
+      <li>Click <strong>“Load unpacked”</strong> and select the unzipped <code>HubSpot-Bulk-Recipient-Export</code> folder (the one containing <code>manifest.json</code>).</li>
+      <li>Go to HubSpot → <em>Marketing ▸ Email</em>, tick the emails you want, and click <strong>“Download selected (ZIP)”</strong>.</li>
+    </ol>
+
+    <p class="hint">
+      Works on <code>https://app.hubspot.com/email/&lt;portal&gt;/manage/…</code>. Only needs the
+      <code>downloads</code> permission. To share with a colleague, just send them the ZIP and these 5 steps —
+      they don’t need this analysis tool running to use the extension.
+    </p>
+  </section>
+
   <section class="log card">
     <div class="log-head">
       <h2>Output log</h2>

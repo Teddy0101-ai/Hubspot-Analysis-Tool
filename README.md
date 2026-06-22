@@ -88,6 +88,22 @@ tweak the two columns above and move on.
 
 ---
 
+## Chrome extension — HubSpot Bulk Recipient Export (ZIP)
+
+The site also hosts the **HubSpot Bulk Recipient Export** Chrome extension (the tool that
+adds a *“Download selected (ZIP)”* button to HubSpot’s email manage page). On the website,
+use **Download extension (.zip)**, then install it once:
+
+1. Unzip it to a permanent folder (Chrome loads it from there — don’t delete it).
+2. Open `chrome://extensions` → turn on **Developer mode** (top-right).
+3. Click **Load unpacked** → pick the unzipped folder (the one with `manifest.json`).
+4. In HubSpot → *Marketing ▸ Email*, tick the emails and click **Download selected (ZIP)**.
+
+> Chrome only allows true one-click installs from the Web Store, so unlisted extensions
+> are installed “unpacked” via the steps above. To share with a colleague, send them the
+> ZIP and these 4 steps — they don’t need this analysis tool running to use the extension.
+> The extension source also lives in [`extension/`](extension/).
+
 ## Notes
 
 - This is a 1-to-1 port of the original Colab notebook logic — only the file paths

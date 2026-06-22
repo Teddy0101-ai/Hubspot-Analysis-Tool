@@ -12,6 +12,7 @@ import os
 import io
 import sys
 import socket
+import zipfile
 import threading
 import webbrowser
 import contextlib
@@ -30,6 +31,7 @@ from pipeline import (
 
 APP_DIR = Path(__file__).resolve().parent
 DATA_DIR = APP_DIR / "data" / "Hubspot"
+EXTENSION_DIR = APP_DIR / "extension"
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 
@@ -195,6 +197,50 @@ def download(key):
     if not path or not path.exists():
         return "File not found. Run the step that produces it first.", 404
     return send_file(str(path), as_attachment=True, download_name=path.name)
+
+
+# ---------------------------------------------------------------------------
+# Chrome extension (HubSpot Bulk Recipient Export)
+# ---------------------------------------------------------------------------
+def _extension_meta():
+    """Read name/version/description from the extension manifest."""
+    manifest = EXTENSION_DIR / "manifest.json"
+    meta = {"name": "HubSpot Bulk Recipient Export (ZIP)", "version": "", "description": ""}
+    try:
+        import json
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+        meta["name"] = data.get("name", meta["name"])
+        meta["version"] = data.get("version", "")
+        meta["description"] = data.get("description", "")
+    except Exception:
+        pass
+    meta["available"] = (EXTENSION_DIR / "manifest.json").exists()
+    return meta
+
+
+@app.route("/api/extension")
+def api_extension():
+    return jsonify(_extension_meta())
+
+
+@app.route("/download/extension")
+def download_extension():
+    """Zip the unpacked extension folder on the fly and serve it."""
+    if not (EXTENSION_DIR / "manifest.json").exists():
+        return "Extension folder not found.", 404
+
+    mem = io.BytesIO()
+    with zipfile.ZipFile(mem, "w", zipfile.ZIP_DEFLATED) as zf:
+        for path in sorted(EXTENSION_DIR.rglob("*")):
+            if path.is_file():
+                zf.write(path, path.relative_to(EXTENSION_DIR))
+    mem.seek(0)
+    return send_file(
+        mem,
+        mimetype="application/zip",
+        as_attachment=True,
+        download_name="HubSpot-Bulk-Recipient-Export.zip",
+    )
 
 
 # ---------------------------------------------------------------------------

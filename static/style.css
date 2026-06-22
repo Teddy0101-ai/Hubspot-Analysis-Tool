@@ -129,6 +129,28 @@ section { max-width: 980px; margin: 18px auto; padding: 0 26px; }
 .mapping li { margin: 4px 0; font-size: 0.9rem; }
 .mapping { border: 1px solid #6b5a17; background: #241f0f; }
 
+/* extension */
+.extension { border-left: 4px solid #ff7a59; } /* HubSpot orange accent */
+.ext-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.ext-desc { color: var(--muted); font-size: 0.88rem; margin: 4px 0 0; }
+.ver {
+  font-size: 0.72rem;
+  background: #ff7a59;
+  color: #2a0f06;
+  padding: 1px 8px;
+  border-radius: 20px;
+  font-weight: 700;
+  vertical-align: middle;
+}
+.install-steps { margin: 10px 0; padding-left: 22px; }
+.install-steps li { margin: 6px 0; font-size: 0.9rem; }
+
 /* log */
 .log-head { display: flex; align-items: center; justify-content: space-between; }
 .logbox {
